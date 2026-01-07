@@ -2,36 +2,35 @@ import React, { useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import TopBar from "./TopBar";
 import Sidebar from "./Sidebar";
-import { colors as mockColors } from "../colors";
 
 /* ===== IMPORT PAGES ===== */
 
 // OC
-import FinancialDashboard from "../pages/OC/FinancialDashboard";
-import BudgetApprovals from "../pages/OC/BudgetApproval";
-import ConferenceSetup from "../pages/OC/ConferenceSetup";
-import EmailManagement from "../pages/OC/EmailManagement";
-import AwardsResults from "../pages/OC/AwardsAnnouncement";
+import FinancialDashboard from "../pages/Secretariat/OC/FinancialDashboard";
+import BudgetApprovals from "../pages/Secretariat/OC/BudgetApproval";
+import ConferenceSetup from "../pages/Secretariat/OC/ConferenceSetup";
+import EmailManagement from "../pages/Secretariat/OC/EmailManagement";
+import AwardsResults from "../pages/Secretariat/OC/AwardsAnnouncement";
 
 // Registration
-import RegistrationList from "../pages/Registration/RegistrationList";
-import RegistrationSettings from "../pages/Registration/RegistrationSettings";
-import CMS from "../pages/Registration/CMS";
-import PostEventComm from "../pages/Registration/PostEventComm";
+import RegistrationList from "../pages/Secretariat/Registration/RegistrationList";
+import RegistrationSettings from "../pages/Secretariat/Registration/RegistrationSettings";
+import CMS from "../pages/Secretariat/Registration/CMS";
+import PostEventComm from "../pages/Secretariat/Registration/PostEventComm";
 
 // Logistics
-import StaffAssignment from "../pages/Logistics/StaffAssignment";
-import QRCheckin from "../pages/Logistics/QRCheckin";
-import VenueAndTravel from "../pages/Logistics/VenueAndTravel";
+import StaffAssignment from "../pages/Secretariat/Logistics/StaffAssignment";
+import QRCheckin from "../pages/Secretariat/Logistics/QRCheckin";
+import VenueAndTravel from "../pages/Secretariat/Logistics/VenueAndTravel";
 
 // Submission
-import ReviewDecisions from "../pages/Submission/Review/ReviewDecisions";
-import PapersList from "../pages/Submission/Review/PapersList";
-import FinalSubmission from "../pages/Submission/Finalization/FinalSubmission";
-import AIProofread from "../pages/Submission/Finalization/AIProofread";
-import PrePublishCheck from "../pages/Submission/Finalization/PrePublishCheck";
-import BestPaperEval from "../pages/Submission/SessionAndAwards/BestPaperEval";
-import AISessionBuilder from "../pages/Submission/SessionAndAwards/AISessionBuilder";
+import ReviewDecisions from "../pages/Secretariat/Submission/Review/ReviewDecisions";
+import PapersList from "../pages/Secretariat/Submission/Review/PapersList";
+import FinalSubmission from "../pages/Secretariat/Submission/Finalization/FinalSubmission";
+import AIProofread from "../pages/Secretariat/Submission/Finalization/AIProofread";
+import PrePublishCheck from "../pages/Secretariat/Submission/Finalization/PrePublishCheck";
+import BestPaperEval from "../pages/Secretariat/Submission/SessionAndAwards/BestPaperEval";
+import AISessionBuilder from "../pages/Secretariat/Submission/SessionAndAwards/AISessionBuilder";
 
 /* ===== MODULE CONFIG ===== */
 
@@ -94,32 +93,23 @@ const SecretariatLayout = () => {
   }));
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        background: mockColors.bg,
-      }}
-    >
+    <div className="flex flex-col h-screen bg-[#f8fafc]">
       {/* ===== TOP BAR ===== */}
       <TopBar
-        colors={mockColors}
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />
 
-      <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+      <div className="flex flex-1 overflow-hidden">
         {/* ===== SIDEBAR ===== */}
         <Sidebar
-          colors={mockColors}
           sidebarOpen={sidebarOpen}
           navItems={navItems}
           moduleTitle={currentModuleData.title}
         />
 
         {/* ===== MAIN CONTENT ===== */}
-        <main style={{ flex: 1, padding: "24px 32px", overflowY: "auto" }}>
+        <main className="flex-1 p-6 px-8 overflow-y-auto">
           <Routes>
             {/* ===== OC ===== */}
             <Route path="oc/dashboard" element={<FinancialDashboard />} />

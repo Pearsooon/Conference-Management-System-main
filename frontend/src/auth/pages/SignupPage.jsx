@@ -4,7 +4,6 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import Toast from "../components/Toast";
 import { Mail, Lock, ArrowRight } from "lucide-react";
-import { colors } from "../../colors";
 
 // NEW imports
 import { usePasswordStrength } from "../hooks/usePasswordStrength";
@@ -62,17 +61,17 @@ const SignupPage = ({ onNavigate }) => {
   return (
     <>
       <AuthLayout>
-        <div style={{ marginBottom: "24px" }}>
-          <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 600 }}>
+        <div className="mb-6">
+          <h2 className="m-0 text-2xl font-semibold">
             Create your account
           </h2>
-          <p style={{ opacity: 0.7, fontSize: "14px" }}>
+          <p className="opacity-70 text-sm">
             Join the conference management platform
           </p>
         </div>
 
         <form onSubmit={submitSignup}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+          <div className="grid grid-cols-2 gap-3.5">
             <Input
               label="First Name"
               placeholder="John"
@@ -97,19 +96,14 @@ const SignupPage = ({ onNavigate }) => {
             icon={Mail}
           />
 
-          <div style={{ marginBottom: "20px" }}>
-            <label style={{ display: "block", marginBottom: "6px" }}>
+          <div className="mb-5">
+            <label className="block mb-1.5">
               User Role
             </label>
             <select
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
-              style={{
-                width: "100%",
-                padding: "12px",
-                borderRadius: "8px",
-                border: `1px solid ${colors.border}`
-              }}
+              className="w-full p-3 rounded-lg border border-[#e2e8f0]"
             >
               <option value="author">Author</option>
               <option value="reviewer">Reviewer</option>
@@ -159,17 +153,11 @@ const SignupPage = ({ onNavigate }) => {
           </Button>
         </form>
 
-        <div style={{ marginTop: "24px", textAlign: "center" }}>
+        <div className="mt-6 text-center">
           Already have an account?{" "}
           <button
             onClick={() => onNavigate("login")}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#2563eb",
-              fontWeight: "600",
-              cursor: "pointer"
-            }}
+            className="bg-transparent border-none text-[#2563eb] font-semibold cursor-pointer"
           >
             Sign in
           </button>

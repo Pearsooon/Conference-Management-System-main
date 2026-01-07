@@ -4,7 +4,6 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import Toast from "../components/Toast";
 import { Mail, CheckCircle } from "lucide-react";
-import { colors } from "../../colors";
 
 const ForgotPasswordPage = ({ onNavigate }) => {
   const [form, setForm] = useState({ email: "" });
@@ -32,11 +31,11 @@ const ForgotPasswordPage = ({ onNavigate }) => {
   return (
     <>
       <AuthLayout>
-        <div style={{ marginBottom: "24px" }}>
-          <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 600 }}>
+        <div className="mb-6">
+          <h2 className="m-0 text-2xl font-semibold">
             Reset your password
           </h2>
-          <p style={{ opacity: 0.7 }}>Enter your email to receive a reset link</p>
+          <p className="opacity-70">Enter your email to receive a reset link</p>
         </div>
 
         <form onSubmit={submit}>
@@ -54,31 +53,15 @@ const ForgotPasswordPage = ({ onNavigate }) => {
           </Button>
 
           {countdown > 0 && (
-            <div
-              style={{
-                marginTop: "16px",
-                display: "flex",
-                gap: "8px",
-                alignItems: "center",
-                padding: "12px",
-                background: `${colors.success}15`,
-                borderRadius: "8px"
-              }}
-            >
-              <CheckCircle size={16} color={colors.success} />
+            <div className="mt-4 flex gap-2 items-center p-3 bg-[#10b981]/[0.15] rounded-lg">
+              <CheckCircle size={16} className="text-[#10b981]" />
               Reset link sent — you can resend in {countdown}s
             </div>
           )}
 
-          <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <div className="mt-5 text-center">
             <button
-              style={{
-                background: "none",
-                border: "none",
-                color: "#2563eb",
-                cursor: "pointer",
-                fontWeight: 600
-              }}
+              className="bg-transparent border-none text-[#2563eb] cursor-pointer font-semibold"
               onClick={() => onNavigate("login")}
             >
               Back to login

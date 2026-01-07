@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { colors } from "../../colors";
 import { Eye, EyeOff } from "lucide-react";
 
 const Input = ({
@@ -17,32 +16,18 @@ const Input = ({
   const [focused, setFocused] = useState(false);
 
   return (
-    <div style={{ marginBottom: "18px" }}>
+    <div className="mb-[18px]">
       {label && (
-        <label
-          style={{
-            display: "block",
-            marginBottom: "6px",
-            fontSize: "14px",
-            fontWeight: 500,
-            color: colors.text
-          }}
-        >
+        <label className="block mb-1.5 text-sm font-medium text-[#1e293b]">
           {label}
         </label>
       )}
 
-      <div style={{ position: "relative" }}>
+      <div className="relative">
         {Icon && (
           <Icon
             size={18}
-            style={{
-              position: "absolute",
-              left: "12px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: colors.textLight
-            }}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]"
           />
         )}
 
@@ -53,45 +38,30 @@ const Input = ({
           onChange={onChange}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          style={{
-            width: "100%",
-            padding: Icon ? "12px 40px 12px 40px" : "12px 14px",
-            border: `1px solid ${
-              error ? colors.danger : focused ? colors.primary : colors.border
-            }`,
-            borderRadius: "8px",
-            fontSize: "15px",
-            outline: "none",
-            transition: "border 0.2s"
-          }}
+          className={`
+            w-full ${Icon ? "px-10 py-3" : "px-3.5 py-3"}
+            border ${error ? "border-[#ef4444]" : focused ? "border-[#2563eb]" : "border-[#e2e8f0]"}
+            rounded-lg text-[15px] outline-none transition-[border] duration-200
+          `}
         />
 
         {showToggle && (
           <button
             type="button"
             onClick={onToggle}
-            style={{
-              position: "absolute",
-              right: "12px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              background: "none",
-              border: "none",
-              padding: 0,
-              cursor: "pointer"
-            }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none p-0 cursor-pointer"
           >
             {showValue ? (
-              <EyeOff size={18} color={colors.textLight} />
+              <EyeOff size={18} className="text-[#64748b]" />
             ) : (
-              <Eye size={18} color={colors.textLight} />
+              <Eye size={18} className="text-[#64748b]" />
             )}
           </button>
         )}
       </div>
 
       {error && (
-        <p style={{ margin: "6px 0 0", fontSize: "13px", color: colors.danger }}>
+        <p className="m-0 mt-1.5 text-[13px] text-[#ef4444]">
           {error}
         </p>
       )}

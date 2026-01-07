@@ -4,7 +4,6 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import Toast from "../components/Toast";
 import { Lock, ArrowRight } from "lucide-react";
-import { colors } from "../../colors";
 
 const ResetPasswordPage = ({ onNavigate }) => {
   const [toast, setToast] = useState(null);
@@ -46,10 +45,10 @@ const ResetPasswordPage = ({ onNavigate }) => {
   return (
     <>
       <AuthLayout>
-        <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 600 }}>
+        <h2 className="m-0 text-2xl font-semibold">
           Set a new password
         </h2>
-        <p style={{ opacity: 0.7, marginBottom: "24px" }}>
+        <p className="opacity-70 mb-6">
           Your new password must be secure
         </p>
 
@@ -91,16 +90,10 @@ const ResetPasswordPage = ({ onNavigate }) => {
           </Button>
         </form>
 
-        <div style={{ marginTop: "24px", textAlign: "center" }}>
+        <div className="mt-6 text-center">
           <button
             onClick={() => onNavigate("login")}
-            style={{
-              background: "none",
-              border: "none",
-              color: colors.primary,
-              cursor: "pointer",
-              fontWeight: 600
-            }}
+            className="bg-transparent border-none text-[#2563eb] cursor-pointer font-semibold"
           >
             Back to login
           </button>

@@ -1,46 +1,26 @@
 import React from "react";
 
-const Button = ({ children, variant = "primary", icon: Icon, onClick, size = "md", colors }) => {
+const Button = ({ children, variant = "primary", icon: Icon, onClick, size = "md" }) => {
+  const baseClasses = "rounded-lg font-medium cursor-pointer flex items-center gap-2 whitespace-nowrap transition-all duration-200";
 
-  const theme = colors || {
-    primary: "#2563eb",
-    primaryHover: "#1d4ed8",
-    danger: "#ef4444",
-    success: "#10b981",
-    bg: "#f8fafc",
-    border: "#e2e8f0",
-    text: "#1e293b"
+  const variantClasses = {
+    primary: "bg-[#2563eb] text-white border-none hover:bg-[#1d4ed8]",
+    secondary: "bg-[#f8fafc] text-[#1e293b] border border-[#e2e8f0] hover:bg-[#e2e8f0]",
+    success: "bg-[#10b981] text-white border-none hover:bg-[#059669]",
+    danger: "bg-[#ef4444] text-white border-none hover:bg-[#dc2626]",
+    ghost: "bg-transparent text-[#1e293b] border border-[#e2e8f0] hover:bg-[#f8fafc]"
   };
 
-  const styles = {
-    primary: { background: theme.primary, color: "white", border: "none" },
-    secondary: { background: theme.bg, color: theme.text, border: `1px solid ${theme.border}` },
-    success: { background: theme.success, color: "white", border: "none" },
-    danger: { background: theme.danger, color: "white", border: "none" },
-    ghost: { background: "transparent", color: theme.text, border: `1px solid ${theme.border}` }
-  };
-
-  const sizes = {
-    sm: { padding: "6px 12px", fontSize: "13px" },
-    md: { padding: "10px 16px", fontSize: "14px" },
-    lg: { padding: "12px 20px", fontSize: "15px" },
+  const sizeClasses = {
+    sm: "px-3 py-1.5 text-[13px]",
+    md: "px-4 py-2.5 text-[14px]",
+    lg: "px-5 py-3 text-[15px]",
   };
 
   return (
     <button
       onClick={onClick}
-      style={{
-        ...styles[variant],
-        ...sizes[size],
-        borderRadius: "8px",
-        fontWeight: "500",
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        whiteSpace: "nowrap",
-        transition: "all 0.2s"
-      }}
+      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]}`}
     >
       {Icon && <Icon size={size === "sm" ? 16 : 18} />}
       {children}
