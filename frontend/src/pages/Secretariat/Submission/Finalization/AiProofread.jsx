@@ -1,58 +1,54 @@
 import React, { useState } from "react";
 import Button from "../../../../ui/Button";
-import { Upload, Send, FileText } from "lucide-react";
 import Modal from "../../../../ui/Modal";
+import { Upload, Send, FileText } from "lucide-react";
 
-const AiProofreadView = ({ colors }) => {
+const AiProofreadView = () => {
   const [file, setFile] = useState(null);
   const [show, setShow] = useState(false);
 
-  const handleUpload = (e) => {
-    setFile(e.target.files[0]);
-    setShow(true);
-  };
-
   return (
     <div>
-      <h2 style={{ fontSize: "28px", margin: 0 }}>AI Proofreading</h2>
-      <p style={{ color: colors.textLight }}>Upload your paper and let AI detect grammar issues</p>
+      <h2 className="text-[28px] font-semibold text-slate-800 mb-2">
+        AI Proofreading
+      </h2>
+      <p className="text-slate-500 text-sm mb-6">
+        Upload your paper and let AI detect grammar issues
+      </p>
 
-      <label
-        style={{
-          marginTop: "20px",
-          padding: "16px",
-          border: `2px dashed ${colors.border}`,
-          borderRadius: "12px",
-          cursor: "pointer",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "12px"
-        }}
-      >
+      <label className="flex items-center justify-center gap-3 border-2 border-dashed rounded-xl p-6 cursor-pointer text-slate-500 hover:bg-slate-50">
         <Upload />
         <span>Select PDF to upload</span>
-        <input type="file" style={{ display: "none" }} onChange={handleUpload} />
+        <input
+          type="file"
+          hidden
+          onChange={(e) => {
+            setFile(e.target.files[0]);
+            setShow(true);
+          }}
+        />
       </label>
 
-      <Modal show={show} onClose={() => setShow(false)} title="AI Proofreading Result" colors={colors}>
-        <div>
-          <p>
-            <FileText size={16} style={{ marginRight: "6px" }} />
-            <strong>{file ? file.name : ""}</strong>
-          </p>
+      <Modal
+        show={show}
+        onClose={() => setShow(false)}
+        title="AI Proofreading Result"
+      >
+        <p className="flex items-center gap-2 text-sm font-semibold">
+          <FileText size={16} />
+          {file?.name}
+        </p>
 
-          <h4 style={{ marginTop: "20px" }}>AI Suggestions:</h4>
+        <h4 className="mt-4 font-semibold">AI Suggestions</h4>
 
-          <ul style={{ lineHeight: "1.8" }}>
-            <li>Improve sentence clarity here...</li>
-            <li>Possible grammar issue: “an algorithm which…” → “an algorithm that…”</li>
-            <li>Consider simplifying the sentence in paragraph 3...</li>
-          </ul>
+        <ul className="list-disc pl-5 text-sm space-y-1 mt-2">
+          <li>Improve sentence clarity here…</li>
+          <li>Grammar issue: “which” → “that”</li>
+          <li>Simplify paragraph 3</li>
+        </ul>
 
-          <Button variant="primary" icon={Send} size="md" style={{ marginTop: "16px" }}>
-            Generate Revised PDF
-          </Button>
+        <div className="mt-4">
+          <Button icon={Send}>Generate Revised PDF</Button>
         </div>
       </Modal>
     </div>

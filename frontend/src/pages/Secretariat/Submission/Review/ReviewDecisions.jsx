@@ -1,84 +1,57 @@
 import React, { useState } from "react";
-import Button from "../../../../ui/Button";
-import Modal from "../../../../ui/Modal";
 import { Filter, Eye } from "lucide-react";
+import Modal from "../../../../ui/Modal";
 
-const ReviewDecisionsView = ({ colors }) => {
-  const [selectedPaper, setSelectedPaper] = useState(null);
-  const [showDetail, setShowDetail] = useState(false);
+const ReviewDecisionsView = () => {
+  const [selected, setSelected] = useState(null);
 
-  const reviewDecisions = [
-    { id: "P001", title: "Deep Learning for Medical Imaging", avg: 4.2, count: 3, status: "Accepted" },
-    { id: "P002", title: "Blockchain for Supply Chain", avg: 3.8, count: 3, status: "Accepted" },
-    { id: "P003", title: "Quantum Computing Applications", avg: 3.5, count: 2, status: "Minor Revision" },
-    { id: "P004", title: "IoT Security Framework", avg: 2.8, count: 3, status: "Major Revision" }
+  const data = [
+    { id: "P001", title: "Deep Learning", avg: 4.2, count: 3, status: "Accepted" },
+    { id: "P002", title: "Blockchain", avg: 3.8, count: 3, status: "Accepted" },
+    { id: "P003", title: "Quantum", avg: 3.5, count: 2, status: "Minor Revision" },
   ];
 
   return (
     <div>
-      <div style={{ marginBottom: "24px" }}>
-        <h2 style={{ fontSize: "28px", margin: 0 }}>Review Decisions</h2>
-        <p style={{ color: colors.textLight }}>View reviewer scores and final recommendations</p>
+      <h2 className="text-[28px] font-semibold text-slate-800 mb-2">
+        Review Decisions
+      </h2>
+      <p className="text-sm text-slate-500 mb-6">
+        View reviewer scores and final recommendations
+      </p>
+
+      <div className="bg-white rounded-xl shadow-sm p-5 mb-6 flex items-center gap-2">
+        <Filter size={18} className="text-slate-400" />
+        <span className="font-semibold text-slate-700">Filters</span>
       </div>
 
-      <div style={{
-        background: colors.cardBg,
-        border: `1px solid ${colors.border}`,
-        borderRadius: "12px",
-        padding: "20px",
-        marginBottom: "20px"
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <Filter size={18} color={colors.textLight} />
-          <span style={{ fontWeight: 600 }}>Filters</span>
-        </div>
-      </div>
-
-      <div style={{
-        background: colors.cardBg,
-        border: `1px solid ${colors.border}`,
-        borderRadius: "12px",
-        overflow: "hidden"
-      }}>
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead>
-            <tr style={{ background: colors.bg }}>
-              {["ID", "Title", "Avg Score", "Reviews", "Status", "Actions"].map((h) => (
-                <th key={h} style={{
-                  padding: "16px",
-                  textAlign: "left",
-                  color: colors.textLight
-                }}>{h}</th>
+      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-slate-50 text-slate-500">
+            <tr>
+              {["ID", "Title", "Avg", "Reviews", "Status", "Actions"].map((h) => (
+                <th key={h} className="px-4 py-3 text-left font-semibold">
+                  {h}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {reviewDecisions.map((p, idx) => (
-              <tr key={p.id} style={{ borderBottom: idx < reviewDecisions.length - 1 ? `1px solid ${colors.border}` : "none" }}>
-                <td style={{ padding: "16px", fontWeight: 600, color: colors.primary }}>{p.id}</td>
-                <td style={{ padding: "16px" }}>{p.title}</td>
-                <td style={{ padding: "16px" }}>{p.avg}</td>
-                <td style={{ padding: "16px" }}>{p.count}</td>
-                <td style={{ padding: "16px" }}>
-                  <span style={{
-                    padding: "4px 10px",
-                    background: p.status.includes("Accepted") ? `${colors.success}15` : `${colors.warning}15`,
-                    color: p.status.includes("Accepted") ? colors.success : colors.warning,
-                    borderRadius: "6px"
-                  }}>
+            {data.map((p) => (
+              <tr key={p.id} className="border-t">
+                <td className="px-4 py-3 font-semibold text-blue-600">{p.id}</td>
+                <td className="px-4 py-3">{p.title}</td>
+                <td className="px-4 py-3">{p.avg}</td>
+                <td className="px-4 py-3">{p.count}</td>
+                <td className="px-4 py-3">
+                  <span className="px-2 py-1 text-xs rounded-md bg-emerald-50 text-emerald-600">
                     {p.status}
                   </span>
                 </td>
-                <td style={{ padding: "16px" }}>
+                <td className="px-4 py-3">
                   <button
-                    onClick={() => { setSelectedPaper(p); setShowDetail(true); }}
-                    style={{
-                      padding: "6px",
-                      background: colors.bg,
-                      border: `1px solid ${colors.border}`,
-                      borderRadius: "6px",
-                      cursor: "pointer"
-                    }}
+                    className="p-2 border rounded-lg"
+                    onClick={() => setSelected(p)}
                   >
                     <Eye size={16} />
                   </button>
@@ -89,21 +62,17 @@ const ReviewDecisionsView = ({ colors }) => {
         </table>
       </div>
 
-      <Modal show={showDetail} onClose={() => setShowDetail(false)} title="Review Summary" colors={colors}>
-        {selectedPaper && (
-          <div>
-            <div style={{ marginBottom: "16px" }}>
-              <strong>ID:</strong> {selectedPaper.id}
-            </div>
-            <div style={{ marginBottom: "16px" }}>
-              <strong>Title:</strong> {selectedPaper.title}
-            </div>
-            <div style={{ marginBottom: "16px" }}>
-              <strong>Average Score:</strong> {selectedPaper.avg}
-            </div>
-            <div style={{ marginBottom: "16px" }}>
-              <strong>Review Count:</strong> {selectedPaper.count}
-            </div>
+      <Modal
+        show={!!selected}
+        onClose={() => setSelected(null)}
+        title="Review Summary"
+      >
+        {selected && (
+          <div className="space-y-2 text-sm">
+            <p><strong>ID:</strong> {selected.id}</p>
+            <p><strong>Title:</strong> {selected.title}</p>
+            <p><strong>Avg Score:</strong> {selected.avg}</p>
+            <p><strong>Reviews:</strong> {selected.count}</p>
           </div>
         )}
       </Modal>
