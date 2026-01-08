@@ -2,54 +2,53 @@ import React, { useState } from "react";
 import Button from "../../../../ui/Button";
 import { CheckCircle, XCircle, RefreshCw } from "lucide-react";
 
-const PrePublishCheckView = ({ colors }) => {
+const PrePublishCheckView = () => {
   const [results, setResults] = useState(null);
-
-  const runCheck = () => {
-    setResults([
-      { id: 1, name: "Metadata completeness", status: "OK" },
-      { id: 2, name: "Missing files", status: "FAIL" },
-      { id: 3, name: "PDF format compliance", status: "OK" },
-      { id: 4, name: "Plagiarism scan", status: "OK" }
-    ]);
-  };
 
   return (
     <div>
-      <h2 style={{ fontSize: "28px", margin: 0 }}>Pre-Publish Check</h2>
-      <p style={{ color: colors.textLight }}>Automatic validation before publication</p>
+      <h2 className="text-[28px] font-semibold text-slate-800 mb-2">
+        Pre-Publish Check
+      </h2>
+      <p className="text-slate-500 text-sm mb-6">
+        Automatic validation before publication
+      </p>
 
-      <Button variant="primary" icon={RefreshCw} onClick={runCheck} size="md" style={{ margin: "20px 0" }}>
+      <Button
+        icon={RefreshCw}
+        onClick={() =>
+          setResults([
+            { id: 1, name: "Metadata completeness", status: "OK" },
+            { id: 2, name: "Missing files", status: "FAIL" },
+            { id: 3, name: "PDF format compliance", status: "OK" },
+            { id: 4, name: "Plagiarism scan", status: "OK" },
+          ])
+        }
+      >
         Run Check
       </Button>
 
       {results && (
-        <div style={{
-          background: colors.cardBg,
-          border: `1px solid ${colors.border}`,
-          borderRadius: "12px",
-          overflow: "hidden"
-        }}>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead>
-              <tr style={{ background: colors.bg }}>
-                {["Check", "Status"].map(h => (
-                  <th key={h} style={{ padding: "16px", color: colors.textLight, textAlign: "left" }}>{h}</th>
-                ))}
+        <div className="bg-white rounded-xl shadow-sm mt-6 overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-slate-50 text-slate-500">
+              <tr>
+                <th className="px-4 py-3 text-left font-semibold">Check</th>
+                <th className="px-4 py-3 text-left font-semibold">Status</th>
               </tr>
             </thead>
 
             <tbody>
-              {results.map(r => (
-                <tr key={r.id} style={{ borderBottom: `1px solid ${colors.border}` }}>
-                  <td style={{ padding: "16px" }}>{r.name}</td>
-                  <td style={{ padding: "16px" }}>
+              {results.map((r) => (
+                <tr key={r.id} className="border-t">
+                  <td className="px-4 py-3">{r.name}</td>
+                  <td className="px-4 py-3 flex items-center gap-2 font-semibold">
                     {r.status === "OK" ? (
-                      <span style={{ color: colors.success, display: "flex", alignItems: "center", gap: "6px" }}>
+                      <span className="text-emerald-500 flex items-center gap-2">
                         <CheckCircle size={16} /> OK
                       </span>
                     ) : (
-                      <span style={{ color: colors.danger, display: "flex", alignItems: "center", gap: "6px" }}>
+                      <span className="text-red-500 flex items-center gap-2">
                         <XCircle size={16} /> FAIL
                       </span>
                     )}

@@ -1,145 +1,132 @@
 import React, { useState } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import TopBar from "./TopBar";
 import Sidebar from "./Sidebar";
 
-/* ===== IMPORT PAGES ===== */
-
-// OC
+/* ===== DASHBOARD ===== */
 import FinancialDashboard from "../pages/Secretariat/OC/FinancialDashboard";
-import BudgetApprovals from "../pages/Secretariat/OC/BudgetApproval";
-import ConferenceSetup from "../pages/Secretariat/OC/ConferenceSetup";
-import EmailManagement from "../pages/Secretariat/OC/EmailManagement";
-import AwardsResults from "../pages/Secretariat/OC/AwardsAnnouncement";
 
-// Registration
+/* ===== REGISTRATION ===== */
+import RegistrationLayout from "../layout/RegistrationLayout";
 import RegistrationList from "../pages/Secretariat/Registration/RegistrationList";
 import RegistrationSettings from "../pages/Secretariat/Registration/RegistrationSettings";
 import CMS from "../pages/Secretariat/Registration/CMS";
 import PostEventComm from "../pages/Secretariat/Registration/PostEventComm";
 
-// Logistics
-import StaffAssignment from "../pages/Secretariat/Logistics/StaffAssignment";
-import QRCheckin from "../pages/Secretariat/Logistics/QRCheckin";
-import VenueAndTravel from "../pages/Secretariat/Logistics/VenueAndTravel";
+/* ===== SUBMISSION ===== */
+import SubmissionLayout from "../layout/SubmissionLayout";
 
-// Submission
-import ReviewDecisions from "../pages/Secretariat/Submission/Review/ReviewDecisions";
+// Review
 import PapersList from "../pages/Secretariat/Submission/Review/PapersList";
+import ReviewDecisions from "../pages/Secretariat/Submission/Review/ReviewDecisions";
+
+// Finalization
 import FinalSubmission from "../pages/Secretariat/Submission/Finalization/FinalSubmission";
-import AIProofread from "../pages/Secretariat/Submission/Finalization/AIProofread";
+import AIProofread from "../pages/Secretariat/Submission/Finalization/AiProofread";
 import PrePublishCheck from "../pages/Secretariat/Submission/Finalization/PrePublishCheck";
+
+// Sessions & Awards (academic)
 import BestPaperEval from "../pages/Secretariat/Submission/SessionAndAwards/BestPaperEval";
-import AISessionBuilder from "../pages/Secretariat/Submission/SessionAndAwards/AISessionBuilder";
 
-/* ===== MODULE CONFIG ===== */
+/* ===== SESSIONS ===== */
+import SessionsLayout from "./SessionLayout";
+import SessionBuilder from "../pages/Secretariat/Sessions/SessionBuilder";
 
-const MODULE_ROUTES = {
-  oc: {
-    title: "Organizing Committee",
-    items: [
-      { id: "oc/dashboard", label: "Financial Dashboard", icon: "DollarSign" },
-      { id: "oc/budget-approval", label: "Budget Approvals", icon: "AlertTriangle" },
-      { id: "oc/setup", label: "Conference Setup", icon: "Settings" },
-      { id: "oc/email-management", label: "Email Management", icon: "Mail" },
-      { id: "oc/awards", label: "Awards & Results", icon: "Award" },
-    ],
+/* ===== SIDEBAR MODULES ===== */
+const SIDEBAR_MODULES = [
+  {
+    key: "dashboard",
+    label: "Dashboard",
+    icon: "LayoutDashboard",
+    path: "/app/dashboard",
   },
-  registration: {
-    title: "Registration & CMS",
-    items: [
-      { id: "reg/list", label: "Registration List", icon: "Users" },
-      { id: "reg/settings", label: "Registration Settings", icon: "Sliders" },
-      { id: "reg/cms", label: "Content Management", icon: "Globe" },
-      { id: "reg/post-comm", label: "Post-Event Comm", icon: "Send" },
-    ],
+  {
+    key: "registration",
+    label: "Registration",
+    icon: "Users",
+    path: "/app/registration",
   },
-  logistics: {
-    title: "Logistics & On-site",
-    items: [
-      { id: "logistics/staff", label: "Staff Assignment", icon: "Calendar" },
-      { id: "logistics/checkin", label: "QR Check-in", icon: "QrCode" },
-      { id: "logistics/venue", label: "Venue & Travel", icon: "MapPin" },
-    ],
+  {
+    key: "submission",
+    label: "Submission",
+    icon: "FileText",
+    path: "/app/submission",
   },
-  submission: {
-    title: "Academic Submission",
-    items: [
-      { id: "sub/review-decisions", label: "Review Decisions", icon: "Eye" },
-      { id: "sub/papers-list", label: "Papers List", icon: "FileText" },
-      { id: "sub/final-submission", label: "Final Submissions", icon: "Upload" },
-      { id: "sub/proofread", label: "AI Proofreading", icon: "Brain" },
-      { id: "sub/pre-publish", label: "Pre-Publish Check", icon: "CheckCircle" },
-      { id: "sub/best-paper", label: "Best Paper Eval", icon: "Star" },
-      { id: "sub/ai-session", label: "AI Session Builder", icon: "Zap" },
-    ],
+  {
+    key: "sessions",
+    label: "Sessions",
+    icon: "Calendar",
+    path: "/app/sessions",
   },
-};
+  {
+    key: "admin",
+    label: "Administration",
+    icon: "Settings",
+    path: "/app/admin",
+  },
+];
 
 const SecretariatLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const location = useLocation();
-
-  /* ===== DETECT CURRENT MODULE ===== */
-  // URL: /app/{module}/{page}
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const moduleKey = pathSegments[1] || "oc";
-
-  const currentModuleData = MODULE_ROUTES[moduleKey] || MODULE_ROUTES.oc;
-
-  const navItems = currentModuleData.items.map((item) => ({
-    ...item,
-    path: `/app/${item.id}`,
-  }));
 
   return (
     <div className="flex flex-col h-screen bg-[#f8fafc]">
       {/* ===== TOP BAR ===== */}
-      <TopBar
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-      />
+      <TopBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       <div className="flex flex-1 overflow-hidden">
         {/* ===== SIDEBAR ===== */}
-        <Sidebar
-          sidebarOpen={sidebarOpen}
-          navItems={navItems}
-          moduleTitle={currentModuleData.title}
-        />
+        <Sidebar sidebarOpen={sidebarOpen} modules={SIDEBAR_MODULES} />
 
         {/* ===== MAIN CONTENT ===== */}
-        <main className="flex-1 p-6 px-8 overflow-y-auto">
+        <main className="flex-1 px-8 py-6 overflow-y-auto">
           <Routes>
-            {/* ===== OC ===== */}
-            <Route path="oc/dashboard" element={<FinancialDashboard />} />
-            <Route path="oc/budget-approval" element={<BudgetApprovals />} />
-            <Route path="oc/setup" element={<ConferenceSetup />} />
-            <Route path="oc/email-management" element={<EmailManagement />} />
-            <Route path="oc/awards" element={<AwardsResults />} />
+            {/* ================= DASHBOARD ================= */}
+            <Route path="dashboard" element={<FinancialDashboard />} />
 
-            {/* ===== REGISTRATION ===== */}
-            <Route path="reg/list" element={<RegistrationList />} />
-            <Route path="reg/settings" element={<RegistrationSettings />} />
-            <Route path="reg/cms" element={<CMS />} />
-            <Route path="reg/post-comm" element={<PostEventComm />} />
+            {/* ================= REGISTRATION ================= */}
+            <Route path="registration" element={<RegistrationLayout />}>
+              <Route index element={<Navigate to="list" replace />} />
+              <Route path="list" element={<RegistrationList />} />
+              <Route path="settings" element={<RegistrationSettings />} />
+              <Route path="cms" element={<CMS />} />
+              <Route path="post-comm" element={<PostEventComm />} />
+            </Route>
 
-            {/* ===== LOGISTICS ===== */}
-            <Route path="logistics/staff" element={<StaffAssignment />} />
-            <Route path="logistics/checkin" element={<QRCheckin />} />
-            <Route path="logistics/venue" element={<VenueAndTravel />} />
+            {/* ================= SUBMISSION ================= */}
+            <Route path="submission" element={<SubmissionLayout />}>
+              <Route index element={<Navigate to="review" replace />} />
 
-            {/* ===== SUBMISSION ===== */}
-            <Route path="sub/review-decisions" element={<ReviewDecisions />} />
-            <Route path="sub/papers-list" element={<PapersList />} />
-            <Route path="sub/final-submission" element={<FinalSubmission />} />
-            <Route path="sub/proofread" element={<AIProofread />} />
-            <Route path="sub/pre-publish" element={<PrePublishCheck />} />
-            <Route path="sub/best-paper" element={<BestPaperEval />} />
-            <Route path="sub/ai-session" element={<AISessionBuilder />} />
+              {/* Review */}
+              <Route path="review">
+                <Route index element={<PapersList />} />
+                <Route path="papers-list" element={<PapersList />} />
+                <Route path="review-decisions" element={<ReviewDecisions />} />
+              </Route>
 
-            {/* ===== DEFAULT ===== */}
-            <Route path="" element={<Navigate to="oc/dashboard" replace />} />
+              {/* Finalization */}
+              <Route path="finalization">
+                <Route index element={<FinalSubmission />} />
+                <Route path="final-submission" element={<FinalSubmission />} />
+                <Route path="proofread" element={<AIProofread />} />
+                <Route path="pre-publish" element={<PrePublishCheck />} />
+              </Route>
+
+              {/* Sessions & Awards (Academic) */}
+              <Route path="sessions-awards">
+                <Route index element={<BestPaperEval />} />
+                <Route path="best-paper" element={<BestPaperEval />} />
+              </Route>
+            </Route>
+
+            {/* ================= SESSIONS ================= */}
+            <Route path="sessions" element={<SessionsLayout />}>
+              <Route index element={<Navigate to="builder" replace />} />
+              <Route path="builder" element={<SessionBuilder />} />
+            </Route>
+
+            {/* ================= DEFAULT ================= */}
+            <Route path="" element={<Navigate to="dashboard" replace />} />
           </Routes>
         </main>
       </div>

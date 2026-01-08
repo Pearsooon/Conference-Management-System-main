@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { Edit, Lock, Unlock, Play, Save } from "lucide-react";
-import Button from "../../ui/Button";
-import Modal from "../../ui/Modal";
+import Button from "../../../ui/Button";
+import Modal from "../../../ui/Modal";
 
-const SessionBuilderView = ({ colors }) => {
+const SessionBuilderView = () => {
   const [sessions, setSessions] = useState([
     {
-      id: 'S1',
-      title: 'AI & Machine Learning Applications',
-      time: '2025-04-15 09:00',
-      room: 'Hall A',
-      chair: 'Dr. Smith',
+      id: "S1",
+      title: "AI & Machine Learning Applications",
+      time: "2025-04-15 09:00",
+      room: "Hall A",
+      chair: "Dr. Smith",
       locked: false,
-      papers: []
+      papers: [],
     },
     {
-      id: 'S2',
-      title: 'Blockchain & Distributed Systems',
-      time: '2025-04-15 11:00',
-      room: 'Hall B',
-      chair: 'Dr. Johnson',
+      id: "S2",
+      title: "Blockchain & Distributed Systems",
+      time: "2025-04-15 11:00",
+      room: "Hall B",
+      chair: "Dr. Johnson",
       locked: false,
-      papers: []
-    }
+      papers: [],
+    },
   ]);
 
   const [selectedSession, setSelectedSession] = useState(null);
@@ -31,79 +31,107 @@ const SessionBuilderView = ({ colors }) => {
   return (
     <div>
       {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 24 }}>
+      <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 style={{ margin: 0, fontSize: 28 }}>AI Session Builder</h2>
-          <p style={{ margin: 0, color: colors.textLight }}>AI-assisted scheduling for the conference</p>
+          <h2 className="text-[28px] font-semibold text-slate-800 mb-2">
+            AI Session Builder
+          </h2>
+          <p className="text-slate-500 text-sm">
+            AI-assisted scheduling for the conference
+          </p>
         </div>
 
-        <div style={{ display: "flex", gap: 12 }}>
-          <Button colors={colors} variant="secondary">Manual Builder</Button>
-          <Button colors={colors} icon={Play}>Run AI Suggestion</Button>
-          <Button colors={colors} variant="success" icon={Save}>Save Schedule</Button>
+        <div className="flex gap-3">
+          <Button variant="secondary">Manual Builder</Button>
+          <Button icon={Play}>Run AI Suggestion</Button>
+          <Button icon={Save} variant="success">Save Schedule</Button>
         </div>
       </div>
 
       {/* Layout */}
-      <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 20 }}>
+      <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6">
+        {/* Config Panel */}
+        <div className="bg-white rounded-xl shadow-sm p-5 space-y-4">
+          <h3 className="font-semibold text-slate-800">Configuration</h3>
 
-        {/* Left Config Panel */}
-        <div style={{
-          background: colors.cardBg,
-          padding: 20,
-          border: `1px solid ${colors.border}`,
-          borderRadius: 12
-        }}>
-          <h3 style={{ marginTop: 0 }}>Configuration</h3>
+          <div>
+            <label className="text-sm text-slate-500">Number of Sessions</label>
+            <input
+              type="number"
+              defaultValue={10}
+              className="w-full mt-1 px-3 py-2 border rounded-lg text-sm"
+            />
+          </div>
 
-          <label>Number of Sessions</label>
-          <input type="number" defaultValue="10"
-            style={{ width: "100%", padding: 8, border: `1px solid ${colors.border}`, borderRadius: 6 }} />
+          <div>
+            <label className="text-sm text-slate-500">Duration</label>
+            <input
+              type="time"
+              defaultValue="02:00"
+              className="w-full mt-1 px-3 py-2 border rounded-lg text-sm"
+            />
+          </div>
 
-          <label style={{ marginTop: 12 }}>Duration</label>
-          <input type="time" defaultValue="02:00"
-            style={{ width: "100%", padding: 8, border: `1px solid ${colors.border}`, borderRadius: 6 }} />
-
-          <label style={{ marginTop: 12 }}>Max Papers</label>
-          <input type="number" defaultValue="5"
-            style={{ width: "100%", padding: 8, border: `1px solid ${colors.border}`, borderRadius: 6 }} />
+          <div>
+            <label className="text-sm text-slate-500">Max Papers</label>
+            <input
+              type="number"
+              defaultValue={5}
+              className="w-full mt-1 px-3 py-2 border rounded-lg text-sm"
+            />
+          </div>
         </div>
 
-        {/* Right Sessions List */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {sessions.map(session => (
-            <div key={session.id} style={{
-              background: colors.cardBg,
-              padding: 20,
-              border: `1px solid ${colors.border}`,
-              borderRadius: 12
-            }}>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+        {/* Sessions */}
+        <div className="space-y-4">
+          {sessions.map((session) => (
+            <div
+              key={session.id}
+              className="bg-white rounded-xl shadow-sm p-5"
+            >
+              <div className="flex justify-between">
                 <div>
-                  <h3 style={{ margin: 0 }}>{session.title}</h3>
-                  <p style={{ margin: 0, color: colors.textLight }}>{session.time} — {session.room}</p>
+                  <h3 className="font-semibold text-slate-800">
+                    {session.title}
+                  </h3>
+                  <p className="text-sm text-slate-500">
+                    {session.time} — {session.room}
+                  </p>
                 </div>
 
-                <div style={{ display: "flex", gap: 8 }}>
-                  <button style={{ padding: 6, border: `1px solid ${colors.border}`, borderRadius: 6 }}
-                    onClick={() => { setSelectedSession(session); setShowSessionModal(true); }}>
+                <div className="flex gap-2">
+                  <button
+                    className="p-2 border rounded-lg"
+                    onClick={() => {
+                      setSelectedSession(session);
+                      setShowSessionModal(true);
+                    }}
+                  >
                     <Edit size={16} />
                   </button>
 
                   <button
-                    style={{ padding: 6, border: `1px solid ${colors.border}`, borderRadius: 6 }}
-                    onClick={() => {
-                      setSessions(sessions.map(s =>
-                        s.id === session.id ? { ...s, locked: !s.locked } : s
-                      ));
-                    }}>
-
-                    {session.locked ? <Lock size={16} /> : <Unlock size={16} />}
+                    className="p-2 border rounded-lg"
+                    onClick={() =>
+                      setSessions(
+                        sessions.map((s) =>
+                          s.id === session.id
+                            ? { ...s, locked: !s.locked }
+                            : s
+                        )
+                      )
+                    }
+                  >
+                    {session.locked ? (
+                      <Lock size={16} />
+                    ) : (
+                      <Unlock size={16} />
+                    )}
                   </button>
                 </div>
               </div>
 
-              <p style={{ marginTop: 12, color: colors.textLight }}>
+              <p className="mt-3 text-sm text-slate-500">
                 {session.papers.length} papers assigned
               </p>
             </div>
@@ -111,10 +139,13 @@ const SessionBuilderView = ({ colors }) => {
         </div>
       </div>
 
-      {/* Modal */}
-      <Modal show={showSessionModal} onClose={() => setShowSessionModal(false)} title="Edit Session" colors={colors}>
-        <p>ID: {selectedSession?.id}</p>
-        <p>Title: {selectedSession?.title}</p>
+      <Modal
+        show={showSessionModal}
+        onClose={() => setShowSessionModal(false)}
+        title="Edit Session"
+      >
+        <p className="text-sm">ID: {selectedSession?.id}</p>
+        <p className="text-sm">Title: {selectedSession?.title}</p>
       </Modal>
     </div>
   );
