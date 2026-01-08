@@ -1,7 +1,6 @@
 // src/auth/components/PasswordStrengthBar.jsx
 
 import React from "react";
-import { colors } from "../../colors";
 
 const strengthColors = [
   "#ef4444", // Very weak
@@ -13,34 +12,24 @@ const strengthColors = [
 
 const PasswordStrengthBar = ({ score, label }) => {
   const width = (score / 5) * 100;
+  const barColor = strengthColors[score - 1] || "#e2e8f0";
+  const textColor = strengthColors[score - 1] || "#64748b";
 
   return (
-    <div style={{ marginBottom: "16px" }}>
-      <div
-        style={{
-          height: "6px",
-          background: colors.border,
-          borderRadius: "4px",
-          overflow: "hidden"
-        }}
-      >
+    <div className="mb-4">
+      <div className="h-1.5 bg-[#e2e8f0] rounded overflow-hidden">
         <div
+          className="h-full transition-[width] duration-300 ease-in-out"
           style={{
-            height: "100%",
             width: `${width}%`,
-            background: strengthColors[score - 1] || colors.border,
-            transition: "width 0.3s ease"
+            backgroundColor: barColor
           }}
         ></div>
       </div>
 
       <div
-        style={{
-          marginTop: "6px",
-          fontSize: "13px",
-          fontWeight: 500,
-          color: strengthColors[score - 1] || colors.textLight
-        }}
+        className="mt-1.5 text-[13px] font-medium"
+        style={{ color: textColor }}
       >
         {label}
       </div>

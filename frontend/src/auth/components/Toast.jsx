@@ -1,32 +1,21 @@
 import React from "react";
 import { CheckCircle, AlertCircle, X } from "lucide-react";
-import { colors } from "../../colors";
 
 const Toast = ({ toast, close }) => {
   if (!toast) return null;
 
-  const bg = {
-    success: colors.success,
-    error: colors.danger,
-    warning: colors.warning
+  const bgColors = {
+    success: "bg-[#10b981]",
+    error: "bg-[#ef4444]",
+    warning: "bg-[#f59e0b]"
   };
 
   return (
-    <div style={{
-      position: "fixed",
-      top: "20px",
-      right: "20px",
-      background: bg[toast.type],
-      color: "white",
-      padding: "16px 20px",
-      borderRadius: "8px",
-      display: "flex",
-      gap: "12px"
-    }}>
+    <div className={`fixed top-5 right-5 ${bgColors[toast.type]} text-white px-5 py-4 rounded-lg flex gap-3`}>
       {toast.type === "success" ? <CheckCircle size={20}/> : <AlertCircle size={20}/>}
       <span>{toast.message}</span>
 
-      <button onClick={close} style={{ background: "none", border: "none", color: "white" }}>
+      <button onClick={close} className="bg-transparent border-none text-white cursor-pointer">
         <X size={20}/>
       </button>
     </div>

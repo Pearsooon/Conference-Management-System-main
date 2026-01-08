@@ -1,102 +1,48 @@
 import React from "react";
 import { Menu, Search, Bell, User, ChevronDown } from "lucide-react";
 
-const TopBar = ({ colors, sidebarOpen, setSidebarOpen }) => {
+const TopBar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
-    <div style={{
-      height: '64px',
-      background: colors.cardBg,
-      borderBottom: `1px solid ${colors.border}`,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '0 24px',
-      position: 'sticky',
-      top: 0,
-      zIndex: 100
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <button onClick={() => setSidebarOpen(!sidebarOpen)} style={{
-          background: 'none',
-          border: 'none',
-          padding: '8px',
-          cursor: 'pointer',
-          color: colors.text
-        }}>
+    <div className="h-16 bg-white border-b border-[#e2e8f0] flex items-center justify-between px-6 sticky top-0 z-[100]">
+      <div className="flex items-center gap-4">
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="bg-transparent border-none p-2 cursor-pointer text-[#1e293b]"
+        >
           <Menu size={24} />
         </button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '40px',
-            height: '40px',
-            background: colors.primary,
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: 'bold',
-            fontSize: '16px'
-          }}>CM</div>
-          <span style={{ fontSize: '18px', fontWeight: '600', color: colors.text }}>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-[#2563eb] rounded-lg flex items-center justify-center text-white font-bold text-base">
+            CM
+          </div>
+          <span className="text-lg font-semibold text-[#1e293b]">
             Conference Manager 2025
           </span>
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <div style={{ position: 'relative' }}>
-          <Search size={18} style={{ position: 'absolute', left: '12px', top: '10px', color: colors.textLight }} />
+      <div className="flex items-center gap-4">
+        <div className="relative">
+          <Search size={18} className="absolute left-3 top-2.5 text-[#64748b]" />
           <input
             placeholder="Search papers, sessions..."
-            style={{
-              padding: '8px 12px 8px 40px',
-              border: `1px solid ${colors.border}`,
-              borderRadius: '8px',
-              width: '280px',
-              fontSize: '14px'
-            }}
+            className="py-2 pl-10 pr-3 border border-[#e2e8f0] rounded-lg w-[280px] text-sm"
           />
         </div>
 
-        <div style={{ position: 'relative', cursor: 'pointer' }}>
-          <Bell size={20} color={colors.text} />
-          <span style={{
-            position: 'absolute',
-            top: '-4px',
-            right: '-4px',
-            background: colors.danger,
-            color: 'white',
-            borderRadius: '12px',
-            padding: '2px 6px',
-            fontSize: '11px',
-            fontWeight: '600'
-          }}>5</span>
+        <div className="relative cursor-pointer">
+          <Bell size={20} className="text-[#1e293b]" />
+          <span className="absolute -top-1 -right-1 bg-[#ef4444] text-white rounded-xl px-1.5 py-0.5 text-[11px] font-semibold">
+            5
+          </span>
         </div>
 
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          cursor: 'pointer',
-          padding: '8px 12px',
-          borderRadius: '8px',
-          border: `1px solid ${colors.border}`
-        }}>
-          <div style={{
-            width: '32px',
-            height: '32px',
-            background: colors.secondary,
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white'
-          }}>
+        <div className="flex items-center gap-2 cursor-pointer py-2 px-3 rounded-lg border border-[#e2e8f0]">
+          <div className="w-8 h-8 bg-[#10b981] rounded-full flex items-center justify-center text-white">
             <User size={18} />
           </div>
-          <span style={{ fontSize: '14px', fontWeight: '500' }}>Secretariat</span>
-          <ChevronDown size={16} color={colors.textLight} />
+          <span className="text-sm font-medium text-[#1e293b]">Secretariat</span>
+          <ChevronDown size={16} className="text-[#64748b]" />
         </div>
       </div>
     </div>

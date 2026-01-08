@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // Giả định Button, Modal được import từ UI components folder
-import Button from "../../../ui/Button"; 
-import Modal from "../../../ui/Modal";
+import Button from "../../../../ui/Button"; 
+import Modal from "../../../../ui/Modal";
 import { Star, Filter, Eye, Save, Brain } from "lucide-react";
 
 // Mock data (thêm AI Score)

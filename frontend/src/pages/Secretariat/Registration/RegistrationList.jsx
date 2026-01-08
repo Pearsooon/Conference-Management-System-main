@@ -1,6 +1,6 @@
 import React from 'react';
 import { Users, Filter, Download, RefreshCw, Check, X, Eye } from 'lucide-react';
-import Button from '../../ui/Button'; 
+import Button from '../../../ui/Button'; 
 
 const RegistrationList = ({ colors, data }) => {
     // Assuming registration data is passed via props

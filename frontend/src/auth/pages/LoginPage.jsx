@@ -4,7 +4,6 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import Toast from "../components/Toast";
 import { Mail, Lock, ArrowRight, Shield } from "lucide-react";
-import { colors } from "../../colors"; // Đã thêm import colors
 
 const LoginPage = ({ onNavigate }) => {
   const [toast, setToast] = useState(null);
@@ -44,11 +43,11 @@ const LoginPage = ({ onNavigate }) => {
     <>
       <AuthLayout>
         {/* Title */}
-        <div style={{ marginBottom: "24px", textAlign: "left" }}>
-          <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 600 }}>
+        <div className="mb-6 text-left">
+          <h2 className="m-0 text-2xl font-semibold">
             Welcome back
           </h2>
-          <p style={{ fontSize: "14px", opacity: 0.7, marginTop: "4px" }}>
+          <p className="text-sm opacity-70 mt-1">
             Sign in to access your account
           </p>
         </div>
@@ -81,30 +80,15 @@ const LoginPage = ({ onNavigate }) => {
           />
 
           {/* Remember + Forgot */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "20px",
-              fontSize: "14px"
-            }}
-          >
-            <label
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                cursor: "pointer"
-              }}
-            >
+          <div className="flex justify-between items-center mb-5 text-sm">
+            <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
                 checked={form.rememberMe}
                 onChange={(e) =>
                   setForm({ ...form, rememberMe: e.target.checked })
                 }
-                style={{ width: "16px", height: "16px" }}
+                className="w-4 h-4"
               />
               Remember me
             </label>
@@ -112,13 +96,7 @@ const LoginPage = ({ onNavigate }) => {
             <button
               type="button"
               onClick={() => onNavigate("forgot")}
-              style={{
-                background: "none",
-                border: "none",
-                color: colors.primary, // Thay đổi: Dùng colors.primary
-                fontWeight: 500,
-                cursor: "pointer"
-              }}
+              className="bg-transparent border-none text-[#2563eb] font-medium cursor-pointer"
             >
               Forgot password?
             </button>
@@ -131,33 +109,16 @@ const LoginPage = ({ onNavigate }) => {
         </form>
 
         {/* Extra info + Signup link */}
-        <div
-          style={{
-            marginTop: "24px",
-            padding: "16px",
-            // THAY ĐỔI STYLE ĐỂ CÂN ĐỐI HƠN:
-            background: colors.cardBg, // Giữ màu nền card để đồng bộ
-            border: `1px solid ${colors.border}`, // Thêm viền nhẹ
-            borderRadius: "8px",
-            textAlign: "center",
-            fontSize: "14px"
-          }}
-        >
-          <Shield size={14} style={{ marginRight: 6 }} />
+        <div className="mt-6 p-4 bg-white border border-[#e2e8f0] rounded-lg text-center text-sm">
+          <Shield size={14} className="inline mr-1.5" />
           Your information is encrypted
           <br />
           <br />
-          Don’t have an account?{" "}
+          Don't have an account?{" "}
           <button
             type="button"
             onClick={() => onNavigate("signup")}
-            style={{
-              background: "none",
-              border: "none",
-              fontWeight: "600",
-              color: colors.primary, // Thay đổi: Dùng colors.primary
-              cursor: "pointer"
-            }}
+            className="bg-transparent border-none font-semibold text-[#2563eb] cursor-pointer"
           >
             Create one
           </button>

@@ -3,7 +3,6 @@ import AuthLayout from "../components/AuthLayout";
 import Button from "../components/Button";
 import Toast from "../components/Toast";
 import { Shield, ArrowRight } from "lucide-react";
-import { colors } from "../../colors";
 
 const TwoFactorPage = ({ onNavigate }) => {
   const [toast, setToast] = useState(null);
@@ -27,14 +26,14 @@ const TwoFactorPage = ({ onNavigate }) => {
   return (
     <>
       <AuthLayout>
-        <div style={{ textAlign: "center", marginBottom: "24px" }}>
-          <Shield size={48} color={colors.primary} />
+        <div className="text-center mb-6">
+          <Shield size={48} className="text-[#2563eb]" />
         </div>
 
-        <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 600 }}>
+        <h2 className="m-0 text-2xl font-semibold">
           Two-Factor Authentication
         </h2>
-        <p style={{ opacity: 0.7, marginBottom: "24px" }}>
+        <p className="opacity-70 mb-6">
           Enter the verification code from your authenticator app
         </p>
 
@@ -44,32 +43,17 @@ const TwoFactorPage = ({ onNavigate }) => {
             onChange={(e) => setCode(e.target.value)}
             maxLength={6}
             placeholder="••••••"
-            style={{
-              width: "100%",
-              padding: "14px",
-              fontSize: "20px",
-              letterSpacing: "10px",
-              textAlign: "center",
-              borderRadius: "8px",
-              border: `1px solid ${colors.border}`,
-              marginBottom: "20px"
-            }}
+            className="w-full p-3.5 text-xl tracking-[10px] text-center rounded-lg border border-[#e2e8f0] mb-5"
           />
 
           <Button icon={ArrowRight} fullWidth type="submit">
             Verify
           </Button>
 
-          <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <div className="mt-5 text-center">
             <button
               onClick={() => onNavigate("login")}
-              style={{
-                background: "none",
-                border: "none",
-                color: colors.primary,
-                cursor: "pointer",
-                fontWeight: 600
-              }}
+              className="bg-transparent border-none text-[#2563eb] cursor-pointer font-semibold"
             >
               Back to login
             </button>

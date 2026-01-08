@@ -1,6 +1,5 @@
 import React from "react";
 import { Loader } from "lucide-react";
-import { colors } from "../../colors";
 
 const Button = ({
   children,
@@ -12,11 +11,11 @@ const Button = ({
   fullWidth,
   loading
 }) => {
-  const variants = {
-    primary: { background: colors.primary, color: "white", border: "none" },
-    secondary: { background: colors.cardBg, color: colors.text, border: `1px solid ${colors.border}` },
-    ghost: { background: "transparent", color: colors.primary, border: "none" },
-    google: { background: colors.cardBg, color: colors.text, border: `1px solid ${colors.border}` }
+  const variantClasses = {
+    primary: "bg-[#2563eb] text-white border-none",
+    secondary: "bg-white text-[#1e293b] border border-[#e2e8f0]",
+    ghost: "bg-transparent text-[#2563eb] border-none",
+    google: "bg-white text-[#1e293b] border border-[#e2e8f0]"
   };
 
   return (
@@ -24,22 +23,15 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
-      style={{
-        ...variants[variant],
-        width: fullWidth ? "100%" : "auto",
-        padding: "12px 24px",
-        borderRadius: "8px",
-        fontSize: "15px",
-        fontWeight: "600",
-        cursor: disabled ? "not-allowed" : "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "8px",
-        opacity: disabled ? 0.6 : 1
-      }}
+      className={`
+        ${variantClasses[variant]}
+        ${fullWidth ? "w-full" : "w-auto"}
+        px-6 py-3 rounded-lg text-[15px] font-semibold
+        ${disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
+        flex items-center justify-center gap-2
+      `}
     >
-      {loading ? <Loader size={18} style={{ animation: "spin 1s linear infinite" }} /> : Icon && <Icon size={18} />}
+      {loading ? <Loader size={18} className="animate-spin" /> : Icon && <Icon size={18} />}
       {children}
     </button>
   );

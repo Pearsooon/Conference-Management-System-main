@@ -3,7 +3,6 @@ import AuthLayout from "../components/AuthLayout";
 import Button from "../components/Button";
 import Toast from "../components/Toast";
 import { Mail, ArrowRight, RefreshCw } from "lucide-react";
-import { colors } from "../../colors";
 
 const VerifyEmailPage = ({ onNavigate }) => {
   const [toast, setToast] = useState(null);
@@ -55,22 +54,15 @@ const VerifyEmailPage = ({ onNavigate }) => {
   return (
     <>
       <AuthLayout>
-        <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 600 }}>
+        <h2 className="m-0 text-2xl font-semibold">
           Verify your email
         </h2>
-        <p style={{ opacity: 0.7, marginBottom: "24px" }}>
+        <p className="opacity-70 mb-6">
           Enter the 6-digit code sent to your email
         </p>
 
         <form onSubmit={submit}>
-          <div
-            style={{
-              display: "flex",
-              gap: "12px",
-              justifyContent: "center",
-              marginBottom: "24px"
-            }}
-          >
+          <div className="flex gap-3 justify-center mb-6">
             {code.map((digit, idx) => (
               <input
                 key={idx}
@@ -78,14 +70,7 @@ const VerifyEmailPage = ({ onNavigate }) => {
                 value={digit}
                 onChange={(e) => handleChange(e.target.value, idx)}
                 maxLength={1}
-                style={{
-                  width: "48px",
-                  height: "56px",
-                  fontSize: "22px",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  border: `1px solid ${colors.border}`
-                }}
+                className="w-12 h-14 text-[22px] text-center rounded-lg border border-[#e2e8f0]"
               />
             ))}
           </div>
@@ -99,36 +84,25 @@ const VerifyEmailPage = ({ onNavigate }) => {
             Verify Email
           </Button>
 
-          <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <div className="mt-5 text-center">
             {resendTimer > 0 ? (
-              <p style={{ opacity: 0.7 }}>
+              <p className="opacity-70">
                 Resend code in {resendTimer}s
               </p>
             ) : (
               <button
                 type="button"
                 onClick={() => setResendTimer(30)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: colors.primary,
-                  cursor: "pointer",
-                  fontWeight: 600
-                }}
+                className="bg-transparent border-none text-[#2563eb] cursor-pointer font-semibold"
               >
-                <RefreshCw size={16} /> Resend Code
+                <RefreshCw size={16} className="inline" /> Resend Code
               </button>
             )}
           </div>
 
-          <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <div className="mt-5 text-center">
             <button
-              style={{
-                background: "none",
-                border: "none",
-                color: colors.primary,
-                cursor: "pointer"
-              }}
+              className="bg-transparent border-none text-[#2563eb] cursor-pointer"
               onClick={() => onNavigate("login")}
             >
               Back to login
