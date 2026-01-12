@@ -35,7 +35,7 @@ const LoginPage = ({ onNavigate }) => {
       showToast("Login successful!", "success");
 
       // tạm thời demo redirect đến giao diện thư ký
-      window.location.href = "/app";
+      window.location.href = "/app/secretariat";
     }, 1500);
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Mail, Plus, Send, CheckCircle, X, Clock } from "lucide-react";
-import Button from "../../../ui/Button";
+import Button from "../../ui/Button";
 
 const StatCard = ({ icon: Icon, label, value, color }) => (
   <div className="bg-white border border-[#e2e8f0] rounded-xl p-6 flex-1">

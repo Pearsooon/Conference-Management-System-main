@@ -1,6 +1,6 @@
 import React from "react";
 import { AlertTriangle, Filter, Download, Check, X, Eye } from "lucide-react";
-import Button from "../../../ui/Button";
+import Button from "../../ui/Button";
 
 const BudgetApproval = () => {
   const budgetRequests = [

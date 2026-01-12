@@ -1,23 +1,29 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom"; // Import Navigate
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import AuthRouter from "./auth/AuthRouter";
-import SecretariatLayout from "./layout/SecretariatLayout";
+
+// Layouts
+import SecretariatLayout from "./layout/secretariat/SecretariatLayout";
+import OCLayout from "./layout/oc/OCLayout";
 
 const App = () => {
   return (
     <Routes>
-      {/* Auth system (Landing page cho /auth/*) */}
+      {/* ================= AUTH ================= */}
       <Route path="/auth/*" element={<AuthRouter />} />
 
-      {/* Main App System (Landing page cho /app/*) */}
-      <Route path="/app/*" element={<SecretariatLayout />} />
+      {/* ================= OC SYSTEM ================= */}
+      <Route path="/app/oc/*" element={<OCLayout />} />
 
-      {/* Redirect Root URL (/) to the Dashboard for testing */}
-      <Route path="/" element={<Navigate to="/app/oc/dashboard" replace />} />
+      {/* ================= SECRETARIAT SYSTEM ================= */}
+      <Route path="/app/secretariat/*" element={<SecretariatLayout />} />
 
-      {/* fallback (Sẽ chuyển hướng các URL không khớp về trang Auth) */}
-      <Route path="*" element={<AuthRouter />} />
+      {/* ================= ROOT REDIRECT ================= */}
+      <Route path="/" element={<Navigate to="/auth/login" replace />} />
+
+      {/* ================= FALLBACK ================= */}
+      <Route path="*" element={<Navigate to="/auth/login" replace />} />
     </Routes>
   );
 };
