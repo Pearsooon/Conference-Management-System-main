@@ -38,31 +38,31 @@ const SIDEBAR_MODULES = [
     key: "dashboard",
     label: "Dashboard",
     icon: "LayoutDashboard",
-    path: "/app/dashboard",
+    path: "/app/secretariat/dashboard",
   },
   {
     key: "registration",
     label: "Registration",
     icon: "Users",
-    path: "/app/registration",
+    path: "/app/secretariat/registration",
   },
   {
     key: "submission",
     label: "Submission",
     icon: "FileText",
-    path: "/app/submission",
+    path: "/app/secretariat/submission",
   },
   {
     key: "sessions",
     label: "Sessions",
     icon: "Calendar",
-    path: "/app/sessions",
+    path: "/app/secretariat/sessions",
   },
   {
     key: "admin",
     label: "Administration",
     icon: "Settings",
-    path: "/app/admin",
+    path: "/app/secretariat/admin",
   },
 ];
 
