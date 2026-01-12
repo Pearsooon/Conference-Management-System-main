@@ -1,9 +1,10 @@
 import React from "react";
-import { Menu, Search, Bell, User, ChevronDown } from "lucide-react";
+import { Menu, Search, Bell } from "lucide-react";
+import RoleSelector from "../components/RoleSelector";
 
 const TopBar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
-    <div className="h-16 bg-white border-b border-[#e2e8f0] flex items-center justify-between px-6 sticky top-0 z-[100]">
+    <div className="h-16 bg-white border-b border-[#e2e8f0] flex items-center justify-between px-6 sticky top-0 z-100">
       <div className="flex items-center gap-4">
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -26,7 +27,7 @@ const TopBar = ({ sidebarOpen, setSidebarOpen }) => {
           <Search size={18} className="absolute left-3 top-2.5 text-[#64748b]" />
           <input
             placeholder="Search papers, sessions..."
-            className="py-2 pl-10 pr-3 border border-[#e2e8f0] rounded-lg w-[280px] text-sm"
+            className="py-2 pl-10 pr-3 border border-[#e2e8f0] rounded-lg w-70 text-sm"
           />
         </div>
 
@@ -37,13 +38,7 @@ const TopBar = ({ sidebarOpen, setSidebarOpen }) => {
           </span>
         </div>
 
-        <div className="flex items-center gap-2 cursor-pointer py-2 px-3 rounded-lg border border-[#e2e8f0]">
-          <div className="w-8 h-8 bg-[#10b981] rounded-full flex items-center justify-center text-white">
-            <User size={18} />
-          </div>
-          <span className="text-sm font-medium text-[#1e293b]">Secretariat</span>
-          <ChevronDown size={16} className="text-[#64748b]" />
-        </div>
+        <RoleSelector />
       </div>
     </div>
   );
