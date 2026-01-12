@@ -17,7 +17,7 @@ const QrCheckin = ({ data }) => {
             <div className="grid grid-cols-2 gap-6">
                 <div className="p-6 bg-white rounded-xl border border-[#e2e8f0]">
                     <h3 className="m-0 mb-4 text-lg font-semibold">Check-in Console</h3>
-                    <div className="h-[200px] bg-[#f8fafc] rounded-lg flex flex-col items-center justify-center mb-5 border-2 border-dashed border-[#e2e8f0]">
+                    <div className="h-50 bg-[#f8fafc] rounded-lg flex flex-col items-center justify-center mb-5 border-2 border-dashed border-[#e2e8f0]">
                         <Camera size={48} className="text-[#64748b]" />
                         <p className="text-[#64748b] mt-2">Simulated Camera View / Scan Area</p>
                     </div>
